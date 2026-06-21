@@ -3,6 +3,7 @@ WORKDIR /opt/server
 EXPOSE 8080
 COPY *.py .
 COPY payment.ini .
+COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 ENV CART_HOST="cart" \
     CART_PORT="8080" \
