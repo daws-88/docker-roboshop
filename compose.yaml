@@ -3,7 +3,7 @@ networks:
   default:
     driver: bridge
     name: roboshop
-    external: false ## true if u created manually
+    external: false ## true if u created manually if using docker commands
 
   mongodb:
     image: mongodb:v1
