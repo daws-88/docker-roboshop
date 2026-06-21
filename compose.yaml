@@ -1,0 +1,72 @@
+services:
+networks:
+  default:
+    driver: bridge
+    name: roboshop
+    external: false ## true if u created manually
+
+  mongodb:
+    image: mongodb:v1
+    container_name: mongodb
+  
+  redis:
+    image: redis:v1
+    container_name: redis
+
+  mysql: 
+    image: mysql:v1
+    container_name: mysql
+
+  rabbitmq:
+    image: rabbitmq:v1
+    container_name: rabbitmq
+
+  catalogue:
+    image: catalogue:v1
+    container_name: catalogue
+    depends_on:
+    - mongodb
+
+  user:
+    image: user:v1
+    container_name: user
+    depends_on:
+    - mongodb 
+    - redis
+
+  cart:
+    image: cart:v1
+    container_name: cart
+    depends_on:
+    - catalogue
+    - redis
+
+  shipping:
+    image: shipping:v1
+    container_name: shipping
+    depends_on:
+    - mysql
+    - cart
+
+  payment:
+    image: payment:v1
+    container_name: payment
+    depends_on:
+    - rabbitmq
+    - user
+    - cart
+
+  frontend:
+    image: frontend:v1
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+    - catalogue
+    - user
+    - cart
+    - shipping
+    - payment
+
+
+
