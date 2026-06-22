@@ -8,18 +8,26 @@ networks:
   mongodb:
     image: mongodb:v1
     container_name: mongodb
+    volumes:
+      - mongodb: /data/db
   
   redis:
     image: redis:v1
     container_name: redis
+    volumes:
+      - redis: /data
 
   mysql: 
     image: mysql:v1
     container_name: mysql
+    volumes:
+    - mysql: /var/lib/mysql
 
   rabbitmq:
     image: rabbitmq:v1
     container_name: rabbitmq
+    volumes:
+      - rabbitmq: /var/lib/rabbitmq
 
   catalogue:
     image: catalogue:v1
@@ -67,6 +75,12 @@ networks:
     - cart
     - shipping
     - payment
+
+  volumes:
+    mongodb: ## docker volume create mongodb.
+    redis:
+    mysql:
+    rabbitmq:
 
 
 
