@@ -71,17 +71,17 @@ services:
     - shipping
     - payment
 
-  volumes:
-    mongodb: ## docker volume create mongodb.
-    redis:
-    mysql:
-    rabbitmq:
-
+ 
 networks:
   default:
     driver: bridge
     name: roboshop
     external: false ## true if u created manually if using docker commands
+volumes:
+  mongodb:
+  redis:
+  mysql:
+  rabbitmq:
 
 
 
