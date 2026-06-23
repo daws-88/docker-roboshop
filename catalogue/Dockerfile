@@ -9,13 +9,20 @@ RUN npm install
 
 FROM node:20.19.5-alpine 
 WORKDIR /opt/server
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
-COPY --from=build /opt/server /opt/server
-RUN chown -R roboshop:roboshop /opt/server
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop \
+    chown -R roboshop:roboshop /opt/server
 ENV MONGO="true" \
    MONGO_URL="mongodb://mongodb:27017/catalogue"
+EXPOSE 8080
+LABEL com.project="roboshop" \
+       trainer="venkatsai"
 USER roboshop
-CMD ["node","server.js"]
+COPY --from=build /opt/server /opt/server
+CMD ["server.js"]
+ENTRYPOINT ["node"]
+
+
+
 
 
 # FROM node:20
