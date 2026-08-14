@@ -5,6 +5,6 @@
 ## as a part k8 init-containers
 FROM mysql:8.0
 COPY db/ /docker-entrypoint-initdb.d
-COPY custom-script.sh /usr/loca;/bin/custom-script.sh
-RUN chmod +x /usr/loca;/bin/custom-script.sh
-ENTRYPOINT [ "/usr/loca;/bin/custom-script.sh" ]
+COPY custom-script.sh /usr/local/bin/custom-script.sh
+RUN chmod +x /usr/local/bin/custom-script.sh
+ENTRYPOINT [ "/usr/local/bin/custom-script.sh" ]
